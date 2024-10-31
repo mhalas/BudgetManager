@@ -1,0 +1,21 @@
+CREATE TABLE Category(
+    Id INT PRIMARY KEY IDENTITY(1, 1),
+    Name NVARCHAR(100) NOT NULL,
+);
+
+CREATE TABLE CategoryItem(
+    Id INT PRIMARY KEY IDENTITY(1, 1),
+    Value NVARCHAR(100) NOT NULL,
+
+    CategoryId INT NOT NULL FOREIGN KEY REFERENCES Category(Id)
+);
+
+CREATE TABLE BankTransaction(
+    Id INT PRIMARY KEY IDENTITY(1, 1),
+    SaleDate DATE NOT NULL,
+    Description NVARCHAR(max),
+    Amount DECIMAL NOT NULL,
+    Currency NVARCHAR(5) NOT NULL,
+
+    CategoryId INT FOREIGN KEY REFERENCES Category(Id)
+);
