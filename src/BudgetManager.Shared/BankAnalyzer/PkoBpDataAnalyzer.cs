@@ -1,4 +1,7 @@
-﻿using System;
+﻿using NLog;
+using Shared.Configuration;
+using Shared.Dto;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using BudgetManager.Shared.Configuration;
@@ -30,17 +33,12 @@ namespace BudgetManager.Shared.BankAnalyzer
                 Logger.Info("Required 'AmountColumn' in configuration property 'ColumnDefinitions'.");
                 return false;
             }
-            if (!_configuration.ColumnDefinitions.ContainsKey("SourceColumn"))
+            if (!_configuration.ColumnDefinitions.ContainsKey("DescriptionColumnsOrder"))
             {
-                Logger.Info("Required 'SourceColumn' in configuration property 'ColumnDefinitions'.");
+                Logger.Info("Required 'DescriptionColumnsOrder' in configuration property 'ColumnDefinitions'.");
                 return false;
             }
-            if (!_configuration.ColumnDefinitions.ContainsKey("TitleColumn"))
-            {
-                Logger.Info("Required 'TitleColumn' in configuration property 'ColumnDefinitions'.");
-                return false;
-            }
-
+            
             return true;
         }
 
@@ -65,17 +63,9 @@ namespace BudgetManager.Shared.BankAnalyzer
             var rows = historyData.Split('\n').ToList();
             var headerRowColumns = rows.First().Split(',').ToList();
 
-            int valueDateIndex = _configuration.ColumnDefinitions["ValueDateColumn"].ColumnIndex.HasValue ?
-                _configuration.ColumnDefinitions["ValueDateColumn"].ColumnIndex.Value : headerRowColumns.IndexOf(_configuration.ColumnDefinitions["ValueDateColumn"].ColumnName);
-
-            int amountIndex = _configuration.ColumnDefinitions["AmountColumn"].ColumnIndex.HasValue ?
-                _configuration.ColumnDefinitions["AmountColumn"].ColumnIndex.Value : headerRowColumns.IndexOf(_configuration.ColumnDefinitions["AmountColumn"].ColumnName);
-
-            int sourceIndex = _configuration.ColumnDefinitions["SourceColumn"].ColumnIndex.HasValue ?
-                _configuration.ColumnDefinitions["SourceColumn"].ColumnIndex.Value : headerRowColumns.IndexOf(_configuration.ColumnDefinitions["SourceColumn"].ColumnName);
-
-            int titleIndex = _configuration.ColumnDefinitions["TitleColumn"].ColumnIndex.HasValue ?
-                _configuration.ColumnDefinitions["TitleColumn"].ColumnIndex.Value : headerRowColumns.IndexOf(_configuration.ColumnDefinitions["TitleColumn"].ColumnName);
+            var valueDateIndex = GetDefinitionsData("ValueDateColumn", headerRowColumns).First();
+            var amountIndex = GetDefinitionsData("AmountColumn", headerRowColumns).First();
+            var descriptionColumns = GetDefinitionsData("DescriptionColumnsOrder", headerRowColumns);
 
             rows.RemoveAt(0);
 
@@ -85,29 +75,64 @@ namespace BudgetManager.Shared.BankAnalyzer
                 if (string.IsNullOrEmpty(row))
                     continue;
 
-                var rowColumns = row.Split(',');
+                var rowColumns = row.Split(new string[] { "\",\"" }, StringSplitOptions.None);
 
                 var valueDate = DateTime.Parse(rowColumns[valueDateIndex].Replace("\"", ""));
                 var amount = decimal.Parse(rowColumns[amountIndex].Replace("\"", "").Replace(".", ","));
-                (string Description, string Category) categoryAndDescription = GetCategory(rowColumns, sourceIndex, titleIndex);
+                (string Description, string Category) categoryAndDescription = GetCategory(rowColumns, descriptionColumns, amount);
 
+                amount = GetAbsoluteValueOfAmount(amount);
                 result.Add(new TransactionRow(valueDate, amount, categoryAndDescription.Description, categoryAndDescription.Category));
             }
 
             return result;
         }
 
-        private (string, string) GetCategory(string[] rowColumns, int sourceIndex, int titleIndex)
+        private decimal GetAbsoluteValueOfAmount(decimal amount)
         {
-            var category = _configuration.CategoryDictionary.FirstOrDefault(x => x.Value.Any(y => rowColumns[sourceIndex].ToLower().Contains(y.ToLower())));
-            if (category.Key != null)
-                return (rowColumns[sourceIndex].Replace("\"", ""), category.Key.Replace("\"", ""));
+            if (_configuration.UseAbsoluteValuesForAmount)
+            {
+                return decimal.Abs(amount);
+            }
 
-            category = _configuration.CategoryDictionary.FirstOrDefault(x => x.Value.Any(y => rowColumns[titleIndex].ToLower().Contains(y.ToLower())));
-            if (category.Key == null)
-                return (rowColumns[sourceIndex].Replace("\"", ""), _configuration.DefaultCategoryName);
-            else
-                return (rowColumns[titleIndex].Replace("\"", ""), category.Key.Replace("\"", ""));
+            return amount;
+        }
+
+        private IEnumerable<int> GetDefinitionsData(string definitionName, List<string> headerRowColumns)
+        {
+            var definitions = _configuration.ColumnDefinitions[definitionName];
+            foreach (var def in definitions)
+            {
+                yield return def.ColumnIndex.HasValue ?
+                    def.ColumnIndex.Value - 1
+                    : headerRowColumns.IndexOf(def.ColumnName);
+            }
+        }
+
+        private (string, string) GetCategory(string[] rowColumns, IEnumerable<int> descriptionColumns, decimal amount)
+        {
+            string description = string.Empty;
+
+            foreach (var column in descriptionColumns)
+            {
+                var category = _configuration.CategoryDictionary.FirstOrDefault(x => x.Value.Any(y => rowColumns[column].ToLower().Contains(y.ToLower())));
+                if (category.Key != null)
+                {
+                    return (rowColumns[column].Replace("\"", ""), category.Key.Replace("\"", ""));
+                }
+
+                if (!string.IsNullOrEmpty(rowColumns[column]) && string.IsNullOrEmpty(description))
+                {
+                    description = rowColumns[column].Replace("\"", "");
+                }
+            }
+
+            if(amount > 0)
+            {
+                return (description, _configuration.DefaultIncomeCategoryName);
+            }
+
+            return (description, _configuration.DefaultExpenseCategoryName);
         }
     }
 }

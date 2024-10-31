@@ -1,213 +1,536 @@
 {
-    "DefaultCategoryName": "Inne",
+  "UseAbsoluteValuesForAmount": false,
+  "GenerateSummary": false,
 
-    "ColumnDefinitions": {
-    "ValueDateColumn": { "ColumnName": "\"Data waluty\"" },
-    "AmountColumn": { "ColumnName": "\"Kwota\"" },
-    "TitleColumn": { "ColumnIndex": "9" },
-    "SourceColumn": { "ColumnIndex": "7" }
-    },
+  "DefaultIncomeCategoryName": "Przychód:Inne",
+  "DefaultExpenseCategoryName": "Wydatki:Inne",
 
-    "CategoryDictionary": {
-        "Alkohol": [
-            "duży ben",
-            "duzy ben",
-            "klub kultowy",
-            "kolejka pub",
-            "pub",
-            "amore del tropico",
-            "kontenerart",
-            "Piwko naprzeciwko",
-            "muchos patatos",
-            "pod pregierzem",
-            "Locum"
-        ],
+  "SourceFilesPath": "Z:\\Expenses",
+  "OutputPath": "Z:",
 
-        "Allegro": [
-            "allegro.pl"
+  "ColumnDefinitions": {
+    "ValueDateColumn": [ { "ColumnName": "\"Data waluty\"" } ],
+    "AmountColumn": [ { "ColumnName": "\"Kwota\"" } ],
+    "DescriptionColumnsOrder": [
+      { "ColumnIndex": "7" },
+      { "ColumnIndex": "6" },
+      { "ColumnIndex": "8" },
+      { "ColumnIndex": "9" }
+    ]
+  },
 
-        ],
+  "CategoryDictionary": {
+    "Wydatki:Alkohol": [
+      "duży ben",
+      "duzy ben",
+      "klub kultowy",
+      "kolejka pub",
+      "pub",
+      "amore del tropico",
+      "kontenerart",
+      "Piwko naprzeciwko",
+      "muchos patatos",
+      "pod pregierzem",
+      "Locum",
+      "KLUB TROPS",
+      "monopol",
+      "piwna stopa",
+      "alkoholove",
+      "cybermachina",
+      "lot chmielna",
+      "lot chmiela",
+      "pomysl"
+    ],
 
-        "Datki": [
-            "malibracia",
-            "zrzutka"
-        ],
+    "Wydatki:Allegro": [
+      "allegro.pl",
+      "aliexpress.com"
+    ],
 
-        "Dom": [
-            "ikea",
-            "leroy merlin",
-            "castorama"
-        ],
+    "Wydatki:Język angielski": [
+      "MIESZKO CIESIELSKI"
+    ],
 
-        "Gry": [
-            "steam",
-            "Valve",
-            "humblebundle",
-            "humblebundl",
-            "blizzardent",
-            "ea.com",
-            "www.g2a.com"
-        ],
+    "Wydatki:Autostrada": [
+      "PPO Ladek West",
+      "A2 PPO STRYKOW",
+      "A2 PPO ZDZARY",
+      "PPO Nagradowice East",
+      "A2 SPO EMILIA",
+      "PPO Ladek East",
+      "PPO Nagradowice West"
+    ],
 
-        "Hotele": [
-            "booking"
-        ],
+    "Wydatki:Datki charytatywne": [
+      "malibracia",
+      "zrzutka.pl",
+      "siepomaga",
+      "www.wosp.org.pl"
+    ],
 
-        "Jedzenie": [
-            "biedronka",
-            "zabka",
-            "pyszne.pl",
-            "lidl",
-            "kfc",
-            "sportinfo",
-            "pizzahut",
-            "amrest",
-            "skubacz.pl",
-            "slimak",
-            "carrefour",
-            "polomarket",
-            "starbucks",
-            "burgerownia",
-            "lewiatan",
-            "burger",
-            "mcdonalds",
-            "stokrotka",
-            "burgs chef",
-            "fawor",
-            "restaumatic",
-            "piccolo",
-            "kuchnia marche",
-            "zaczek",
-            "pasibus",
-            "glodny.pl",
-            "stary mlynek",
-            "kebab",
-            "pizza",
-            "pasztecik",
-            "kuchnie marche",
-            "stacja cafe",
-            "kawiarnia u przyjaciol",
-            "sklep spozywczy",
-            "piotr i pawel",
-            "cukiernia sowa",
-            "food & drinks",
-            "auchan",
-            "https://dagrasso.pl",
-            "BERLIN Doner Kebap",
-            "aldi",
-            "PIEROZEK I KOMPOCIK",
-            "FOOD TRUCK",
-            "Subway",
-            "Shrimp house",
-            "mobilny punkt gastronomic",
-            "Aramis",
-            "lody z sercem",
-            "Konkurent",
-            "pierozkarnia",
-            "Miedzy wierszami",
-            "karmelek",
-            "bar",
-            "kura warzyw",
-            "Sklep Renia",
-            "Eurospar",
-            "Cukiernia luna",
-            "Nad potokiem"
-        ],
+    "Wydatki:Dom": [
+      "ikea",
+      "leroy merlin",
+      "castorama",
+      "jula",
+      "jysk",
+      "obi"
+    ],
 
-        "Rozrywka": [
-            "ZAKRECONA BILA",
-            "STUDIO TANCA",
+    "Wydatki:Gry": [
+      "steam",
+      "Valve",
+      "humblebundle",
+      "humblebundl",
+      "blizzardent",
+      "ea.com",
+      "www.g2a.com",
+      "gog.com",
+      "g2a",
+      "blizzard",
+      "gog",
+      "cdkeys.com",
+      "keye.pl",
+      "tanisoft.pl",
+      "kinguin",
+      "origin.com"
+    ],
 
-        ],
+    "Wydatki:Hotele": [
+      "booking",
+      "hotel",
+      "reymont",
+      "airbnb"
+    ],
 
-        "Restauracje": [
-            "restauracja",
-            "barn s.c. Renata",
-            "scisk barbara knobloch",
-            "food matters"
-        ],
+    "Wydatki:Jedzenie": [
+      "biedronka",
+      "zabka",
+      "pyszne.pl",
+      "lidl",
+      "kfc",
+      "sportinfo",
+      "pizzahut",
+      "amrest",
+      "skubacz.pl",
+      "slimak",
+      "carrefour",
+      "polomarket",
+      "starbucks",
+      "burgerownia",
+      "lewiatan",
+      "burger",
+      "mcdonalds",
+      "stokrotka",
+      "burgs chef",
+      "fawor",
+      "restaumatic",
+      "piccolo",
+      "kuchnia marche",
+      "zaczek",
+      "pasibus",
+      "glodny.pl",
+      "stary mlynek",
+      "kebab",
+      "pizza",
+      "pasztecik",
+      "kuchnie marche",
+      "stacja cafe",
+      "kawiarnia u przyjaciol",
+      "sklep spozywczy",
+      "piotr i pawel",
+      "cukiernia sowa",
+      "food & drinks",
+      "auchan",
+      "https://dagrasso.pl",
+      "BERLIN Doner Kebap",
+      "aldi",
+      "PIEROZEK I KOMPOCIK",
+      "FOOD TRUCK",
+      "Subway",
+      "Shrimp house",
+      "mobilny punkt gastronomic",
+      "Aramis",
+      "lody z sercem",
+      "Konkurent",
+      "pierozkarnia",
+      "Miedzy wierszami",
+      "karmelek",
+      "bar",
+      "kura warzyw",
+      "Sklep Renia",
+      "Eurospar",
+      "Cukiernia luna",
+      "Nad potokiem",
+      "ORZO",
+      "petit paris",
+      "sushi",
+      "PRACOWNIA CZEKOLADY",
+      "INDIA HOUSE",
+      "SZCZAW I MIRABELKI",
+      "costa",
+      "KLUB JAS AND MALGOSIA",
+      "GASTRO FAZA",
+      "Taco by Jesus",
+      "DARIA DYNARSKA", //Dzień dobry - Szczecin.
+      "ul. Krzywoustego 9/10", //NETTO - Szczecin
+      "KEBAB",
+      "TOSKA CANTINE",
+      "CAFE",
+      "SUPERMARKET",
+      "dino",
+      "vemat",
+      "lodziarnie firmowe",
+      "slodki kacik",
+      "kocimietka",
+      "catering",
+      "coffee",
+      "karmello",
+      "sbx",
+      "chichi 4u",
+      "express oriental",
+      "gastrofaza",
+      "coo sp z oo c90",
+      "rozove",
+      "mjm marta wierzbinska",
+      "automaty uvp",
+      "fabryczka nalesni",
+      "sklep renia",
+      "badzetera bagieteria",
+      "Kentucky Fried Chicken",
+      "Malpka",
+      "Bistro - ali baba 2",
+      "spaghetteria",
+      "maro market v",
+      "Berliner Doner Kebap",
+      "spolem",
+      "Tivoli",
+      "Fresh Mexican Grill",
+      "Pastwisko",
+      "Nalesnikarnia gramof",
+      "chata polska",
+      "express marche",
+      "pod strzecha",
+      "rogaty-rogalik-kawiarnia",
+      "zielony zakatek",
+      "freshmarket",
+      "delikatesy",
+      "tesco",
+      "grycan",
+      "zbyszek sklep",
+      "t.a.d",
+      "pizzeria mario",
+      "nefryt bis",
+      "makpol",
+      "real",
+      "sevi oriental",
+      "gastro",
+      "precelek",
+      "guty",
+      "francuski lacznik",
+      "kaufland",
+      "a a aldona kapczuk",
+      "pro-porcja",
+      "altana",
+      "bistro",
+      "czerwony kapturek",
+      "my fresh bistro",
+      "z wyzszej bulki",
+      "u karola",
+      "pomodoro",
+      "groszek",
+      "minimarket",
+      "Tomasz bagier",
+      "tchibo",
+      "mcdonadls",
+      "wytwornia pierogo",
+      "supersam",
+      "intermarche",
+      "north fish",
+      "Leszka 20",
+      "sklep renia",
+      "cukiernia natura",
+      "gosu",
+      "mount blanc",
+      "huel",
+      "sklep furore shop"
+    ],
 
-        "Telefon": [
-            "virginmobile.pl",
-            "24.play.pl"
-        ],
+    "Wydatki:Kurier": [
+      "inpost"
+    ],
 
-        "Internet": [ "www.inea.pl" ],
-        "Paliwo": [
-            "shell",
-            "bp",
-            "orlen",
-            "circle k",
-            "lotos",
-            "Stacja paliw"
-        ],
+    "Wydatki:Rozrywka": [
+      "ZAKRECONA BILA",
+      "STUDIO TANCA",
+      "MULTIKINO",
+      "bilety.luminapark.pl",
+      "www.cinema-city.pl",
+      "CINEMA CITY",
+      "BLACK BALL",
+      "Szczecin Adres: COYOTE",
+      "havana",
+      "klub na fali",
+      "kontenery art",
+      "paintball",
+      "DoSopotu Club & Lounge",
+      "za kulisami",
+      "twoje sniadanie",
+      "9 stop",
+      "van gogh",
+      "kultowa",
+      "klub bilardowy",
+      "alternativa",
+      "klub u bazyla",
+      "pacha poznan",
+      "mk bowling",
+      "helios",
+      "gravitacja",
+      "gotinder"
+    ],
 
-        "Netflix": [
-            "netflix.com",
-            "netflix",
-            "netflix",
-            "net zrzutka"
-        ],
+    "Wydatki:Restauracje": [
+      "restauracja",
+      "barn s.c. Renata",
+      "scisk barbara knobloch",
+      "food matters",
+      "mykonos",
+      "whiskey in the jar",
+      "estella",
+      "trzy kolory",
+      "restauracje",
+      "czerwony kapturek",
+      "kawiarnia",
+      "zielona weranda",
+      "restaurant",
+      "pastelowa",
+      "pijalnia czekolady",
+      "da grasso",
+      "meat us",
+      "ministerstwo browaru",
+      "zapiecek",
+      "czerwone krzeslo",
+      "mcdonald",
+      "amma r.kozak a.siwczynski",
+      "amma r. kozak",
+    ],
 
-        "Mieszkanie": [
-            "profit zarz�dzanie nieruchomo�ciami"
-        ],
+    "Wydatki:Telefon": [
+      "virginmobile.pl",
+      "24.play.pl",
+      "simplus",
+      "virginmobil"
+    ],
 
-        "Prąd": [
-            "za pr�d"
-        ],
+    "Wydatki:Internet": [
+      "www.inea.pl",
+      "INEA"
+    ],
+    "Wydatki:Paliwo": [
+      "shell",
+      "bp",
+      "orlen",
+      "circle k",
+      "lotos",
+      "Stacja paliw",
+      "stacja s1"
+    ],
 
-        "Podarunki": [
-            "lilou",
-            "kwiaciarnia",
-            "el krepel",
-            "Apart"
-        ],
+    "Wydatki:Telewizja": [
+      "netflix.com",
+      "netflix",
+      "netflix",
+      "amazon prime"
+    ],
 
-        "Odzież": [
-            "new yorker",
-            "deichmann",
-            "kik",
-            "Carry",
-            "bytom"
-        ],
+    "Przychód:Zwroty:Telewizja": [
+      "net zrzutka",
+      "marta głucińska"
+    ],
 
-        "Sport": [
-            "decathlon",
-            "wirtualnebiegi",
-            "Fabryka Formy"
-        ],
+    "Wydatki:Paypro": [
+      "UL. KANCLERSKA 15"
+    ],
 
-        "Sprzęt": [
-            "x-kom.pl"
-        ],
+    "Wydatki:Mieszkanie:Najem": [
+      "zarządzanie nieruchomościami",
+      "anna chlebowska"
+    ],
 
-        "Uber": [
-            "uber"
-        ],
+    "Wydatki:Mieszkanie:Prąd": [
+      "za prąd"
+    ],
 
-        "Samochód": [
-            "ergo hestia",
-            "PKO LEASING",
-            "RYSZARD T",
-            "SZPOT",
-            "PARKING",
-            "Myjnia bezdotykowa",
-            "Haffnera 6"
-        ],
+    "Wydatki:Prezenty": [
+      "lilou",
+      "kwiaciarnia",
+      "el krepel",
+      "Apart",
+      "Salon Firmowy W.Kruk C.",
+      "GINTROWICZ FLOWERS MALT",
+      "kwiatownia",
+      "briju",
+      "flowers"
+    ],
 
-        "URZĄD SKARBOWY": [
-            "URZĄD SKARBOWY"
-        ],
+    "Wydatki:Odzież": [
+      "new yorker",
+      "deichmann",
+      "kik",
+      "Carry",
+      "bytom",
+      "CCC",
+      "pepco",
+      "reserved",
+      "h and m",
+      "big star",
+      "venezia",
+      "repablo",
+      "pull & bear",
+      "cropp",
+      "calzedonia",
+      "majster but"
+    ],
 
-        "Wynagrodzenie": [
-            "exant",
-            "halasdev"
-        ],
+    "Wydatki:Sport": [
+      "decathlon",
+      "wirtualnebiegi",
+      "Fabryka Formy",
+      "termy",
+      "plywalnia",
+      "pływalnia",
+      "klub sport. czerwony smok",
+      "go sport"
+    ],
 
-        "Zdrowie": [
-            "rehasport",
-            "apteka"
-        ]
-    }
+    "Wydatki:Sprzęt": [
+      "x-kom.pl",
+      "X-KOM",
+      "x - kom",
+      "x kom",
+      "sims recycling solutions",
+      "spec kable",
+      "media markt",
+      "euro rtv agd",
+      "mediaexpert",
+      "euro-net"
+    ],
+
+    "Wydatki:Transport": [
+      "bilet.intercity.pl",
+      "www.biletyregionalne.pl",
+      "uber",
+      "przewozy regionalne"
+    ],
+
+    "Wydatki:Samochód": [
+      "info-car.pl",
+      "osk pegaz",
+      "ergo hestia",
+      "PKO LEASING",
+      "portal.pkoleasing.pl",
+      "RYSZARD T",
+      "SZPOT",
+      "PARKING",
+      "Myjnia bezdotykowa",
+      "Haffnera 6",
+      "www.ucando.pl",
+      "OPONEO.PL",
+      "Ubezpieczenie",
+      "Mazdy",
+      "Mazda",
+      "VOYAGER",
+      "ZARZĄD DRÓG MIEJSKICH",
+      "CARWASH",
+      "apcoa",
+      "myjnia samochodowa",
+      "promyk", //wulkanizator
+      "banieczka spolka akcyjna",
+      "statoil",
+      "pzu",
+      "ufg",
+      "norauto",
+      "foltyn",
+      "autodna",
+      "mennica automat",
+      "mennica  automat"
+    ],
+
+    "Wydatki:Urząd skarbowy": [
+      "Urząd skarbowy"
+    ],
+
+    "Przychód:Wynagrodzenie": [
+      "exant",
+      "halasdev",
+      "nazwa nadawcy: mc donalds polska",
+      "nazwa nadawcy: arp ideas",
+      "nazwa nadawcy: centermed poznań spółka",
+      "nazwa nadawcy: efitness"
+    ],
+
+    "Wydatki:Firma": [
+      "halasdev",
+      "małgorzata jasicka"
+    ],
+
+    "Wydatki:Zdrowie": [
+      "rehasport",
+      "apteka",
+      "PHYSIOART FIZJOTE",
+      "lamignat",
+      "WLKP CEN MED",
+      "super - pharm",
+      "rossmann",
+      "diagnostyka",
+      "szpital św. wojciecha",
+      "vital-dent",
+      "certus",
+      "pracownia rtg",
+      "ola fizjo"
+    ],
+
+    "Wydatki:Psycholog": [
+      "PRACOWNIA PSYCHOL",
+      "AGATA KAŁUŻNA"
+    ],
+
+    "Wydatki:Oszczędzanie": [
+      "AUTOOSZCZĘDZANIE-PRZELEW"
+    ],
+
+    "Przychód:Oszczędzanie": [
+      "odsetki należne lokaty",
+      "kapitalizacja odsetek"
+    ],
+
+    "Wydatki:Uczelnia": [
+      "WSNHID ul. Gen Tadeusza Kutrzeby 10",
+      "Collegium davinci",
+      "wsnhid",
+      "politechnika poznańska"
+    ],
+
+    "Wydatki:Bank": [
+      "kod z karty kodów",
+      "opłata miesięczna za kartę",
+      "podatek od odsetek kapitałowych",
+      "za prowadzenie rachunku",
+      "opłata prop. za kartę",
+      "kapit.odsetek karnych",
+      "kwota cash back"
+    ],
+
+    "Wydatki:Zwiedzanie": [
+      "twierdza srebrna gora",
+      "zamek grodno",
+      "schronisko na szczelincu",
+    ],
+
+    "Przychód:Stypendium": [
+      "wyższa szkoła nauk humanistycznych i dziennikarstwa",
+      "A42512500",
+      "nazwa nadawcy: collegium da vinci"
+    ]
+  }
 }

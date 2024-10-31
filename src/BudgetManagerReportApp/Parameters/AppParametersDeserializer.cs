@@ -1,8 +1,8 @@
-﻿using System;
+﻿using ExpenseAnalyzer.Exceptions;
+using Shared.Enum;
+using System;
 using System.Collections.Generic;
 using System.Linq;
-using BudgetManager.Shared.Enum;
-using BudgetManagerReportApp.Exceptions;
 
 namespace BudgetManagerReportApp.Parameters
 {
@@ -17,11 +17,15 @@ namespace BudgetManagerReportApp.Parameters
             var parametersDictionary = parameters.ToDictionary(x => x.Split("=")[0], x => x.Split("=")[1]);
 
             if (!parametersDictionary.ContainsKey(FileParameterName))
+            {
                 throw new ParameterException(FileParameterName);
-
+            }
+            
             if(!parametersDictionary.ContainsKey(BankTypeParameterName)
                 || !Enum.IsDefined(typeof(BankType), parametersDictionary[BankTypeParameterName]))
+            {
                 throw new ParameterException(BankTypeParameterName);
+            }
 
             var bankType = (BankType)Enum.Parse(typeof(BankType), parametersDictionary[BankTypeParameterName]);
 

@@ -1,4 +1,10 @@
-﻿using System;
+﻿using ExpenseAnalyzer.Exceptions;
+using ExpenseAnalyzer.Parameters;
+using Newtonsoft.Json;
+using NLog;
+using Shared.Configuration;
+using Shared.Factory;
+using System;
 using System.Diagnostics;
 using System.IO;
 using BudgetManager.Shared.Configuration;
@@ -44,30 +50,27 @@ namespace BudgetManagerReportApp
             var configurationString = File.ReadAllText("./Configuration.json");
             var configuration = JsonConvert.DeserializeObject<ConfigurationDto>(configurationString);
 
+            if (args.Length == 0)
+            {
+                Logger.Info($@"Cannot find csv path parameter. Getting files from folder '{configuration.SourceFilesPath}'.");
+                return;
+            }
+
             try
             {
-                Stopwatch time = new Stopwatch();
                 var bankAnalyzer = new BankFactory(configuration).GetBankAnalyzer(parameters.Bank);
-                var outputLogic = new DataOutputFactory(parameters.FilePath).GetDataOutput(parameters.Output);
+                var outputLogic = new DataOutputFactory(configuration, parameters.FilePath).GetDataOutput(parameters.Output);
 
                 if (bankAnalyzer.CanExecute())
                 {
-                    using (var reader = new StreamReader(parameters.FilePath))
-                    {
-                        Logger.Info("Start analyzing.");
-                        time.Start();
-                        var result = bankAnalyzer.AnalyzeExpenseHistory(reader.ReadToEnd());
-                        Logger.Info("Analyze complete.");
+                    var sourceDataExecutor = GetSourceDataExecutor(configuration, parameters);
 
-                        outputLogic.OutputData(result).Wait();
-
-                        time.Stop();
-                        Logger.Info($"Complete in time {time.Elapsed.Hours}:{time.Elapsed.Minutes}:{time.Elapsed.Seconds}.");
-                    }
+                    sourceDataExecutor.Execute(bankAnalyzer, outputLogic);
                 }
                 else
+                {
                     Logger.Info("Analyzing not started.");
-
+                }
             }
             catch(Exception ex)
             {
@@ -81,6 +84,16 @@ namespace BudgetManagerReportApp
 
             Logger.Info("Press any key to close...");
             Console.ReadKey();
+        }
+
+        private static ISourceDataExecutor GetSourceDataExecutor(ConfigurationDto configuration, AppParameters parameters)
+        {
+            if (string.IsNullOrEmpty(parameters.FilePath))
+            {
+                return new FolderDataSource(configuration.SourceFilesPath);
+            }
+
+            return new SingleFileDataSource(parameters.FilePath);
         }
     }
 }
