@@ -1,26 +1,20 @@
-﻿using BudgetManager.Shared.Enum;
+﻿using BudgetManager.Shared.Configuration;
+using BudgetManager.Shared.Enum;
 using BudgetManager.Shared.Output;
 
 namespace BudgetManager.Shared.Factory
 {
-    public class DataOutputFactory
+    public class DataOutputFactory(string originFilePath, ConfigurationDto configuration)
     {
-        private readonly string _originFilePath;
-
-        public DataOutputFactory(string originFilePath)
-        {
-            _originFilePath = originFilePath;
-        }
-
         public IDataOutput GetDataOutput(OutputType type)
         {
             switch (type)
             {
                 case OutputType.Excel:
-                    return new ExcelFileCreator(_originFilePath);
+                    return new ExcelFileCreator(originFilePath);
                 case OutputType.CSV:
                 default:
-                    return new CsvFileCreator(_originFilePath);
+                    return new CsvFileCreator(originFilePath, configuration);
 
 
             }

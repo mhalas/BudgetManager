@@ -4,6 +4,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using BudgetManager.Shared.Configuration;
 using BudgetManager.Shared.Extension;
 using BudgetManager.Shared.Models;
 using NLog;
@@ -38,9 +39,11 @@ namespace BudgetManager.Shared.Output
 
             var result = stringBuilder.ToString();
             GenerateOutputFile(result);
+
+            return Task.CompletedTask;
         }
 
-        private void FillWithData(IEnumerable<ExpenseDataRow> data, StringBuilder stringBuilder)
+        private void FillWithData(IEnumerable<TransactionRow> data, StringBuilder stringBuilder)
         {
             stringBuilder.AppendLine("\"Data waluty\",\"Kwota\",\"Opis\",\"Kategoria\"");
 
@@ -50,7 +53,7 @@ namespace BudgetManager.Shared.Output
             }
         }
 
-        private string GetAmount(ExpenseDataRow row)
+        private string GetAmount(TransactionRow row)
         {
             if(row.Amount >= 0)
             {
@@ -60,7 +63,7 @@ namespace BudgetManager.Shared.Output
             return row.Amount.ToString();
         }
 
-        private void FillWithSummary(IEnumerable<ExpenseDataRow> data, StringBuilder stringBuilder)
+        private void FillWithSummary(IEnumerable<TransactionRow> data, StringBuilder stringBuilder)
         {
             stringBuilder.AppendLine();
             stringBuilder.AppendLine("Wydatki,,");
@@ -85,7 +88,7 @@ namespace BudgetManager.Shared.Output
             }
         }
 
-        private void GenerateOutputFile(string result)
+        private Task GenerateOutputFile(string result)
         {
             if (!Directory.Exists(_configuration.OutputPath))
                 Directory.CreateDirectory(_configuration.OutputPath);

@@ -1,14 +1,8 @@
-﻿using ExpenseAnalyzer.Exceptions;
-using ExpenseAnalyzer.Parameters;
-using Newtonsoft.Json;
-using NLog;
-using Shared.Configuration;
-using Shared.Factory;
-using System;
-using System.Diagnostics;
+﻿using System;
 using System.IO;
 using BudgetManager.Shared.Configuration;
 using BudgetManager.Shared.Factory;
+using BudgetManager.Shared.SourceData;
 using BudgetManagerReportApp.Exceptions;
 using BudgetManagerReportApp.Parameters;
 using Newtonsoft.Json;
@@ -59,7 +53,7 @@ namespace BudgetManagerReportApp
             try
             {
                 var bankAnalyzer = new BankFactory(configuration).GetBankAnalyzer(parameters.Bank);
-                var outputLogic = new DataOutputFactory(configuration, parameters.FilePath).GetDataOutput(parameters.Output);
+                var outputLogic = new DataOutputFactory(parameters.FilePath, configuration).GetDataOutput(parameters.Output);
 
                 if (bankAnalyzer.CanExecute())
                 {

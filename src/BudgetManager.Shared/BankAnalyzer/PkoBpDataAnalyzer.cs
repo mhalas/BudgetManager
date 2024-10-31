@@ -1,7 +1,4 @@
-﻿using NLog;
-using Shared.Configuration;
-using Shared.Dto;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using BudgetManager.Shared.Configuration;

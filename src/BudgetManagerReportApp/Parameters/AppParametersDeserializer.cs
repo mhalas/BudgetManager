@@ -1,8 +1,8 @@
-﻿using ExpenseAnalyzer.Exceptions;
-using Shared.Enum;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using BudgetManager.Shared.Enum;
+using BudgetManagerReportApp.Exceptions;
 
 namespace BudgetManagerReportApp.Parameters
 {
