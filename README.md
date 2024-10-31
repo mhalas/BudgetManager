@@ -1,2 +1,4 @@
-# ExpenseAnalyzer
-Expense analyzer from bank export file.
+# Budget Manager
+Budget Manager from bank export files.
+
+WIP
